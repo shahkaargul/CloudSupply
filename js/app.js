@@ -11,39 +11,10 @@ let currentMode  = 'single';   // 'single' | 'bulk'
 let activeFilter = 'All';      // category filter on the products page
 let isDark       = true;       // current theme
 
-/* =====================================================================
-   DELIVERY POPUP
-   - Shows automatically once per session (sessionStorage flag)
-   - Fires 1.8 s after the page loader clears so it feels intentional
-   - Closes on: ✕ button | "Got it" link | backdrop click | ESC key
-   ===================================================================== */
-
-function openDeliveryPopup() {
-  const popup = document.getElementById('delivery-popup');
-  popup.classList.add('dp-show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeDeliveryPopup() {
-  const popup = document.getElementById('delivery-popup');
-  popup.classList.remove('dp-show');
-  document.body.style.overflow = '';
-  sessionStorage.setItem('dp-seen', '1');
-}
-
-/* Close on backdrop click (outside the card) */
-document.getElementById('delivery-popup').addEventListener('click', function (e) {
-  if (e.target === this) closeDeliveryPopup();
-});
-
-/* Close button wired up */
-document.getElementById('dp-close-btn').addEventListener('click', closeDeliveryPopup);
-
-/* ESC key also closes the delivery popup */
+/* ESC key closes the product modal */
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
-    closeDeliveryPopup();
-    closeModal(); // existing product modal
+    closeModal();
   }
 });
 
@@ -460,20 +431,9 @@ document.getElementById('prod-modal').addEventListener('click', function (e) {
 
 /* Note: ESC key handling is consolidated in the DELIVERY POPUP section above */
 
-/* =====================================================================
-   LOADER  +  AUTO-SHOW DELIVERY POPUP
-   ===================================================================== */
-
-window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('loader').classList.add('out');
     observeFU();
-
-    /* Show the delivery popup 1.8 s after loader clears,
-       but only once per browser session */
-    if (!sessionStorage.getItem('dp-seen')) {
-      setTimeout(openDeliveryPopup, 1800);
-    }
   }, 2000);
 });
 
