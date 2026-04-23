@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="CloudSupply Co — Pakistan's trusted source for premium vapes, pods & flavors. Authentic products, wholesale pricing, WhatsApp-first ordering."/>
+  <title>CloudSupply Co — Premium Vapes &amp; Flavors</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet"/>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     CURSOR
+═══════════════════════════════════════════════════════════════════ -->
+<div class="cur cur-dot"  id="curDot"></div>
+<div class="cur cur-ring" id="curRing"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     LOADER
+═══════════════════════════════════════════════════════════════════ -->
+<div id="loader">
+  <div class="ld-logo">CloudSupply Co</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+  <div class="ld-sub">Loading your supply...</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════════════════ -->
+<nav id="nav">
+  <a class="nav-logo" href="#" onclick="showPage('home')">
+    <div class="logo-icon">☁</div>
+    <span>CloudSupply Co</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')"     class="active" id="nl-home">Home</a></li>
+    <li><a href="#" onclick="showPage('products')"              id="nl-products">Products</a></li>
+    <li><a href="#" onclick="showPage('bulk')"                  id="nl-bulk">Bulk / Wholesale</a></li>
+    <li><a href="#" onclick="showPage('about')"                 id="nl-about">About</a></li>
+    <li><a href="#" onclick="showPage('contact')"               id="nl-contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="nav-search-wrap">
+      <span class="search-icon">🔍</span>
+      <input
+        class="nav-search"
+        type="text"
+        placeholder="Search products..."
+        id="navSearch"
+        oninput="handleSearch(this.value)"
+      />
+    </div>
+    <button class="icon-btn mode-toggle-nav" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    <button class="hamburger" id="ham">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     MOBILE MENU
+═══════════════════════════════════════════════════════════════════ -->
+<div class="mob-menu" id="mobMenu">
+  <input class="mob-search" type="text" placeholder="Search products..." oninput="handleSearch(this.value)"/>
+  <a href="#" onclick="showPage('home');     closeMob()">Home</a>
+  <a href="#" onclick="showPage('products'); closeMob()">Products</a>
+  <a href="#" onclick="showPage('bulk');     closeMob()">Bulk / Wholesale</a>
+  <a href="#" onclick="showPage('about');    closeMob()">About</a>
+  <a href="#" onclick="showPage('contact');  closeMob()">Contact</a>
+  <a href="https://wa.me/923001234567" target="_blank" onclick="closeMob()" style="color:var(--neon-g)">Order on WhatsApp</a>
+  <a href="#" onclick="toggleTheme(); closeMob()" style="color:var(--text3)">Toggle Theme 🌙</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     MODE BAR  (Single Buyer / Bulk Reseller)
+═══════════════════════════════════════════════════════════════════ -->
+<div id="modebar">
+  <span class="mode-label">👤 Shopping as:</span>
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="tab-single" onclick="setMode('single')">🛒 Single Buyer</button>
+    <button class="mode-tab"        id="tab-bulk"   onclick="setMode('bulk'); showPage('bulk')">📦 Bulk / Reseller</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE : HOME
+═══════════════════════════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="h-orb h-orb1"></div>
+      <div class="h-orb h-orb2"></div>
+      <div class="h-orb h-orb3"></div>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-badge"><span class="live"></span>100% Authentic Products</div>
+        <h1 class="hero-h1">Your Premium<br><span class="grad-t">Cloud</span><br>Supply.</h1>
+        <p class="hero-p">Top-tier vapes, pods &amp; flavors — sourced authentic, priced right. Order effortlessly via WhatsApp. No cart, no hassle.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="showPage('products')">✦ Shop Single Items</button>
+          <button class="btn btn-bulk"    onclick="setMode('bulk'); showPage('bulk')">📦 Bulk Orders</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-n">19</div><div class="hstat-l">Products</div></div>
+          <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">Series</div></div>
+          <div class="hstat"><div class="hstat-n">★4.9</div><div class="hstat-l">Rating</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-stack" id="heroCards"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Strip -->
+  <div class="trust-strip">
+    <div class="trust-items">
+      <div class="trust-item"><span class="ti">✅</span> 100% Original Products</div>
+      <div class="trust-item"><span class="ti">⚡</span> Fast WhatsApp Response</div>
+      <div class="trust-item"><span class="ti">📦</span> Bulk Discounts Available</div>
+      <div class="trust-item"><span class="ti">🛡️</span> Verified Suppliers</div>
+      <div class="trust-item"><span class="ti">🚀</span> Same-Day Dispatch</div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <section class="section fu">
+    <div class="s-tag">✦ Browse by Category</div>
+    <div class="section-head-row">
+      <h2 class="s-head">Shop by <span class="grad-t">Category</span></h2>
+      <button class="btn btn-secondary btn-sm" onclick="showPage('products')">View All →</button>
+    </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </section>
+
+  <!-- New Arrivals -->
+  <section class="section fu" style="background:var(--bg2)">
+    <div class="s-tag">🆕 Just Landed</div>
+    <div class="section-head-row">
+      <h2 class="s-head">New <span class="grad-t">Arrivals</span></h2>
+      <button class="btn btn-secondary btn-sm" onclick="showPage('products'); filterCat('All')">See All →</button>
+    </div>
+    <div class="prod-grid" id="newArrivalsGrid"></div>
+  </section>
+
+  <!-- Best Sellers -->
+  <section class="section fu">
+    <div class="s-tag">🔥 Community Faves</div>
+    <div class="section-head-row">
+      <h2 class="s-head">Best <span class="grad-t2">Sellers</span></h2>
+      <button class="btn btn-secondary btn-sm" onclick="showPage('products')">See All →</button>
+    </div>
+    <div class="prod-grid" id="bestSellersGrid"></div>
+  </section>
+
+</div><!-- /#page-home -->
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE : PRODUCTS
+═══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-products">
+  <section class="section">
+    <div class="s-tag fu">✦ Full Catalog</div>
+    <h2 class="s-head fu">All <span class="grad-t">Products</span></h2>
+    <p class="s-sub fu" style="margin-bottom:32px">Browse everything. Click any product to see details, then order via WhatsApp in seconds.</p>
+
+    <!-- Search Results (shown when user is searching) -->
+    <div class="search-results-wrap" id="searchResults">
+      <div class="sr-title">Search Results</div>
+      <div class="prod-grid" id="searchGrid"></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar fu" id="filterBar">
+      <div id="catPills"></div>
+
+      <select class="filter-select" id="priceFilter" onchange="applyFilters()">
+        <option value="">All Prices</option>
+        <option value="0-1000">Under Rs. 1,000</option>
+        <option value="1000-2000">Rs. 1,000–2,000</option>
+        <option value="2000-4000">Rs. 2,000–4,000</option>
+        <option value="4000-99999">Rs. 4,000+</option>
+      </select>
+
+      <select class="filter-select" id="flavorFilter" onchange="applyFilters()">
+        <option value="">All Types</option>
+        <option value="Fruity Ice">Fruity Ice</option>
+        <option value="Dessert">Dessert</option>
+      </select>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="prod-grid fu" id="allProdGrid"></div>
+  </section>
+</div><!-- /#page-products -->
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE : BULK / WHOLESALE
+═══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-bulk">
+  <section class="section">
+
+    <!-- Hero Banner -->
+    <div class="bulk-hero fu">
+      <div class="s-tag">📦 Wholesale Program</div>
+      <h1 class="s-head" style="max-width:600px;margin:16px auto">
+        Bulk Orders for <span class="grad-t2">Shops &amp; Resellers</span>
+      </h1>
+      <p style="color:var(--text2);max-width:480px;margin:0 auto 28px;font-size:.95rem;line-height:1.7">
+        Get exclusive wholesale rates. Minimum order quantities apply. WhatsApp us for a custom price list tailored to your shop.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a
+          href="https://wa.me/923001234567?text=Hi%2C+I+want+bulk+pricing+details+and+a+price+list+for+CloudSupply+Co!"
+          target="_blank"
+          class="btn btn-bulk"
+        >📦 Request Price List via WhatsApp</a>
+        <a
+          href="https://wa.me/923001234567?text=Hi%2C+I+am+a+shop+owner+interested+in+wholesale+supply+from+CloudSupply+Co."
+          target="_blank"
+          class="btn btn-secondary"
+        >💬 Contact for Wholesale</a>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="bulk-stats fu">
+      <div class="bulk-stat-card">
+        <div class="bulk-stat-n grad-t">30%</div>
+        <div class="bulk-stat-l">Max Discount on Bulk</div>
+      </div>
+      <div class="bulk-stat-card">
+        <div class="bulk-stat-n grad-t2">10 Units</div>
+        <div class="bulk-stat-l">Minimum Order Qty</div>
+      </div>
+      <div class="bulk-stat-card">
+        <div class="bulk-stat-n grad-t3">Same Day</div>
+        <div class="bulk-stat-l">Dispatch for Bulk Orders</div>
+      </div>
+    </div>
+
+    <!-- Wholesale Rates Table -->
+    <div class="fu">
+      <div class="s-tag">📋 Price Table</div>
+      <h2 class="s-head">Wholesale <span class="grad-t">Rates</span></h2>
+      <p class="s-sub" style="margin-bottom:0">All bulk prices are per unit at stated quantities. Contact for further negotiation.</p>
+
+      <div class="price-table">
+        <div class="price-table-head">
+          <div>Product</div>
+          <div>Retail</div>
+          <div>Bulk Rate</div>
+          <div class="ph-moq">Min. Qty</div>
+          <div class="ph-action">Order</div>
+        </div>
+        <div id="bulkTable"></div>
+      </div>
+    </div>
+
+  </section>
+</div><!-- /#page-bulk -->
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE : ABOUT
+═══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <section class="section">
+    <div class="about-grid">
+
+      <!-- Visual Panel -->
+      <div class="about-visual fu">
+        <div class="about-big">CS<br>Co.</div>
+        <p style="color:var(--text2);font-size:.85rem;margin-top:12px">Est. 2023 · Pakistan</p>
+        <div style="display:flex;gap:24px;justify-content:center;margin-top:24px">
+          <div class="hstat"><div class="hstat-n">19</div><div class="hstat-l">Products</div></div>
+          <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">Series</div></div>
+          <div class="hstat"><div class="hstat-n">★4.9</div><div class="hstat-l">Rating</div></div>
+        </div>
+      </div>
+
+      <!-- Story Text -->
+      <div class="fu">
+        <div class="s-tag">✦ Our Story</div>
+        <h2 class="s-head" style="margin-top:16px">Built on <span class="grad-t">Authenticity</span></h2>
+        <p style="color:var(--text2);line-height:1.8;margin-bottom:16px;font-size:.95rem">
+          CloudSupply Co was born out of frustration — too many fake products, too many overpriced suppliers, and zero transparency in the market. We fixed that.
+        </p>
+        <p style="color:var(--text2);line-height:1.8;margin-bottom:16px;font-size:.95rem">
+          We source directly from verified distributors, offer both retail and wholesale pricing, and operate entirely through WhatsApp — keeping it fast, personal, and honest.
+        </p>
+        <p style="color:var(--text2);line-height:1.8;margin-bottom:28px;font-size:.95rem">
+          Whether you're a casual buyer or a shop owner looking to stock up — CloudSupply Co is your one stop, no-nonsense supply chain.
+        </p>
+        <div class="about-tag-wrap">
+          <span class="about-tag">100% Authentic</span>
+          <span class="about-tag">Wholesale Ready</span>
+          <span class="about-tag">Premium Brands</span>
+          <span class="about-tag">Fast Response</span>
+          <span class="about-tag">Transparent Pricing</span>
+          <span class="about-tag">Pakistan-wide</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div><!-- /#page-about -->
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE : CONTACT
+═══════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <section class="section">
+    <div class="s-tag fu">✦ Get in Touch</div>
+    <h2 class="s-head fu">Order or <span class="grad-t">Ask Anything</span></h2>
+    <p class="s-sub fu" style="margin-bottom:0">WhatsApp is the fastest way to reach us. We respond within minutes.</p>
+
+    <div class="contact-grid">
+      <!-- Left: Contact cards -->
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="contact-card fu">
+          <div class="cc-icon">💬</div>
+          <div class="cc-title">WhatsApp Orders</div>
+          <div class="cc-desc">Direct line for orders, inquiries, and stock availability. Usually online 9AM–11PM.</div>
+          <a href="https://wa.me/923001234567?text=Hi%2C+I+want+to+order+from+CloudSupply+Co!" target="_blank" class="btn btn-wa btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Chat Now
+          </a>
+        </div>
+
+        <div class="contact-card fu">
+          <div class="cc-icon">📸</div>
+          <div class="cc-title">Instagram</div>
+          <div class="cc-desc">Follow for new drops, deals, and product showcases. DMs open.</div>
+          <a href="https://instagram.com/cloudsupplyco" target="_blank" class="btn btn-secondary btn-sm">Follow @cloudsupplyco</a>
+        </div>
+      </div>
+
+      <!-- Right: Message form -->
+      <div class="contact-form fu">
+        <h3>Send a Message</h3>
+        <div class="fg"><label>Your Name</label><input type="text" placeholder="e.g. Ahmed" id="cName"/></div>
+        <div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+92 300 0000000" id="cPhone"/></div>
+        <div class="fg">
+          <label>I am a...</label>
+          <select id="cType">
+            <option value="single buyer">Single Buyer</option>
+            <option value="shop owner / reseller">Shop Owner / Reseller</option>
+          </select>
+        </div>
+        <div class="fg"><label>Product / Query</label><input type="text" placeholder="e.g. Elfbar 5000 – Blue Razz" id="cProduct"/></div>
+        <div class="fg"><label>Message</label><textarea placeholder="Any questions or special requirements?" id="cMsg"></textarea></div>
+        <button class="btn btn-wa" style="width:100%;justify-content:center;margin-top:8px" onclick="sendContactWA()">
+          Send via WhatsApp ✦
+        </button>
+      </div>
+    </div>
+  </section>
+</div><!-- /#page-contact -->
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     DELIVERY ANNOUNCEMENT POPUP
+═══════════════════════════════════════════════════════════════════ -->
+<div id="delivery-popup" role="dialog" aria-modal="true" aria-labelledby="dp-title-text">
+  <div class="dp-card">
+
+    <!-- Close button -->
+    <button class="dp-close" id="dp-close-btn" aria-label="Close announcement">✕</button>
+
+    <!-- Ambient orbs -->
+    <div class="dp-orb-wrap">
+      <div class="dp-orb dp-orb1"></div>
+      <div class="dp-orb dp-orb2"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="dp-header">
+      <!-- Pulsing pin icon -->
+      <div class="dp-pin-wrap">
+        <div class="dp-pin-ring"></div>
+        <div class="dp-pin-ring dp-pin-ring2"></div>
+        <div class="dp-pin-icon">📍</div>
+      </div>
+
+      <!-- Tag -->
+      <div class="dp-tag"><span class="dp-dot"></span> Now Available</div>
+
+      <!-- Headline -->
+      <h2 class="dp-title" id="dp-title-text">
+        Delivery <span class="grad-t">All Over</span><br>Pakistan 🇵🇰
+      </h2>
+      <p class="dp-subtitle">
+        We ship nationwide — whether you're a solo buyer or stocking up wholesale.
+        Fast, tracked, and reliable delivery to every city.
+      </p>
+    </div>
+
+    <!-- Pakistan banner -->
+    <div class="dp-map-wrap">
+      <div class="dp-pak-flag">🗺️</div>
+      <div class="dp-map-text">
+        <strong>100+ Cities Covered</strong>
+        <span>Karachi · Lahore · Islamabad · Peshawar · Quetta<br>and everywhere in between</span>
+      </div>
+    </div>
+
+    <!-- Feature grid -->
+    <div class="dp-features">
+      <div class="dp-feat">
+        <div class="dp-feat-icon">🛒</div>
+        <div class="dp-feat-text">
+          <strong>Single Buyers</strong>
+          <span>Order 1 unit — delivered to your door</span>
+        </div>
+      </div>
+      <div class="dp-feat">
+        <div class="dp-feat-icon">📦</div>
+        <div class="dp-feat-text">
+          <strong>Bulk / Resellers</strong>
+          <span>Wholesale quantities shipped same day</span>
+        </div>
+      </div>
+      <div class="dp-feat">
+        <div class="dp-feat-icon">⚡</div>
+        <div class="dp-feat-text">
+          <strong>Express Available</strong>
+          <span>Next-day to major cities on request</span>
+        </div>
+      </div>
+      <div class="dp-feat">
+        <div class="dp-feat-icon">🔒</div>
+        <div class="dp-feat-text">
+          <strong>Safe Packaging</strong>
+          <span>Discreet, secure & tamper-proof wrapping</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA actions -->
+    <div class="dp-actions">
+      <a
+        href="https://wa.me/923001234567?text=Hi%2C+I+want+to+place+an+order+and+need+delivery+info+for+my+city!"
+        target="_blank"
+        class="btn btn-primary dp-cta"
+        onclick="closeDeliveryPopup()"
+      >
+        📦 Order Now — We'll Deliver!
+      </a>
+      <button class="dp-dismiss" id="dp-dismiss-btn" onclick="closeDeliveryPopup()">
+        Got it, continue browsing →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     PRODUCT DETAIL MODAL
+═══════════════════════════════════════════════════════════════════ -->
+<div id="prod-modal">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-img"  id="mImg"></div>
+    <div class="modal-info" id="mInfo"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     FLOATING WHATSAPP BUTTON
+═══════════════════════════════════════════════════════════════════ -->
+<div id="wa-float">
+  <div class="wa-float-label">Order on WhatsApp</div>
+  <button
+    class="wa-float-btn"
+    onclick="window.open('https://wa.me/923001234567?text=Hi%2C+I+want+to+order+from+CloudSupply+Co!','_blank')"
+    title="WhatsApp"
+  >
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     BACK TO TOP
+═══════════════════════════════════════════════════════════════════ -->
+<button id="btt" onclick="scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:4px">
+        <div class="logo-icon">☁</div>
+        <span>CloudSupply Co</span>
+      </div>
+      <p>Pakistan's trusted source for premium vapes, pods &amp; flavors. Authentic products, wholesale pricing, and WhatsApp-first ordering.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/923001234567"          target="_blank" class="soc-btn">💬</a>
+        <a href="https://instagram.com/cloudsupplyco" target="_blank" class="soc-btn">📸</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('products')">All Products</a></li>
+        <li><a href="#" onclick="showPage('bulk')">Bulk Orders</a></li>
+        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+        <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Our Series</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('products'); filterCat('Pineapple Series')">Pineapple Series · 50 MG</a></li>
+        <li><a href="#" onclick="showPage('products'); filterCat('Krush (Ice Series)')">Krush (Ice Series) · 30 MG</a></li>
+        <li><a href="#" onclick="showPage('products'); filterCat('Creations (Dessert Series)')">Creations (Dessert) · 35 MG</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 CloudSupply Co. All rights reserved.</p>
+    <p>For 18+ adults only. Vape responsibly.</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SCRIPTS
+     data.js must be loaded before app.js
+═══════════════════════════════════════════════════════════════════ -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
